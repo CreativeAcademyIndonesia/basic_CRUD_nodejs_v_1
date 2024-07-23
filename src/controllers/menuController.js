@@ -1,4 +1,4 @@
-const { get, insert, update, deleted } = require('../models/menuModel')
+const { get, insert, update, deleted, insertPesanan } = require('../models/menuModel')
 const getMenuMakan = async (req, res) => {
     try{
         const data = await get()
@@ -74,9 +74,25 @@ const deleteMenuMakan = async (req, res)=>{
     }
 }
 
+const createPesanan = async (req, res)=>{
+    try{
+        const data = await insertPesanan(req.body)
+        res.status(201).json({
+            message : "pesanan berhasil ditambahkan",
+            data : req.body
+        })
+    }catch(err){
+        res.status(500).json({
+            message : "Internal server error", 
+            data : []
+        })
+    }
+}
+
 module.exports = {
     getMenuMakan, 
     createMenuMakan, 
     updateMenuMakan, 
-    deleteMenuMakan
+    deleteMenuMakan,
+    createPesanan
 }

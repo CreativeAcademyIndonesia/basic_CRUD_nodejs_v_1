@@ -44,4 +44,16 @@ const deleted = async (id)=>{
         throw err
     }
 }
-module.exports = {get, insert, update, deleted}
+
+const insertPesanan = async (body)=>{
+    try{
+        const {menu, qty, catatan} = body
+        const sql = 'INSERT INTO pesanan (menu, qty, catatan) VALUES (?, ?, ?)'
+        const data = await dbEnterprise.query(sql, [menu, qty, catatan])
+        return data
+    }catch(err){
+        console.log(err)
+        throw err
+    }
+}
+module.exports = {get, insert, update, deleted, insertPesanan}
